@@ -62,5 +62,12 @@ group :development do
   gem 'rspec-rails', '~> 6.0.0'
 end
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 gem 'devise'
 gem 'letter_opener_web'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
