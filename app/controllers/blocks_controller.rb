@@ -20,28 +20,24 @@ class BlocksController < ApplicationController
   # POST /blocks
   def create
     @block = Block.new(block_params.merge(user_id: current_user.id))
-    begin
+
+    if @block.save
       @transactions = CnabParserService.new(block_params[:cnab].tempfile.path).call
-    rescue Date::Error => e
-      handle_error(e)
-    rescue ArgumentError => e
-      handle_error(e)
-    rescue Errno::ENOENT => e
-      handle_error(e)
-    rescue StandardError => e
-      handle_error(e)
-    end
+      @transactions = @transactions.map { |transaction| transaction.merge(block_id: @block.id) }
+      Transaction.insert_all!(@transactions)
 
-    ActiveRecord::Base.transaction do
-      if @block.save
-        @transactions = @transactions.map { |transaction| transaction.merge(block_id: @block.id) }
-        Transaction.insert_all!(@transactions)
-
-        redirect_to @block, notice: 'Block was successfully created.'
-      else
-        render :new, status: :unprocessable_entity
-      end
+      redirect_to @block, notice: 'Block was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
+  rescue Date::Error => e
+    handle_error(e)
+  rescue ArgumentError => e
+    handle_error(e)
+  rescue Errno::ENOENT => e
+    handle_error(e)
+  rescue StandardError => e
+    handle_error(e)
   end
 
   # PATCH/PUT /blocks/1

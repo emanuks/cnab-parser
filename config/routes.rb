@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :blocks
-  resources :transactions
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
