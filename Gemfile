@@ -66,6 +66,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
 
 gem 'cpf_cnpj'
