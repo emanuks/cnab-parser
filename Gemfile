@@ -66,6 +66,7 @@ group :test do
   gem 'shoulda-matchers'
 end
 
+gem 'cpf_cnpj'
 gem 'devise'
 gem 'letter_opener_web'
 gem 'omniauth'
