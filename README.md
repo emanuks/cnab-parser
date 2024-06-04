@@ -8,7 +8,7 @@ This web application has a form for uploading CNAB Files, after uploading a vali
 
 The parser checks if the file is valid and if each field has the correct format.
 
-This application has devise authentication and Google OAuth, you can either create your own user from scratch or just sing in through Google.
+This application has devise authentication and Google OAuth, you can either create your own user from scratch or just sign in through Google.
 
 #### CNAB Documentation
 
