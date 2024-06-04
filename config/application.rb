@@ -20,6 +20,7 @@ Bundler.require(*Rails.groups)
 
 module CnabParser
   class Application < Rails::Application
+    config.time_zone = 'Buenos Aires'
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BlocksController < ApplicationController
   before_action :set_block, only: %i[show edit update destroy]
 
@@ -22,22 +24,12 @@ class BlocksController < ApplicationController
     @block = Block.new(block_params.merge(user_id: current_user.id))
 
     if @block.save
-      @transactions = CnabParserService.new(block_params[:cnab].tempfile.path).call
-      @transactions = @transactions.map { |transaction| transaction.merge(block_id: @block.id) }
-      Transaction.insert_all!(@transactions)
+      create_transactions
 
       redirect_to @block, notice: 'Block was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
-  rescue Date::Error => e
-    handle_error(e)
-  rescue ArgumentError => e
-    handle_error(e)
-  rescue Errno::ENOENT => e
-    handle_error(e)
-  rescue StandardError => e
-    handle_error(e)
   end
 
   # PATCH/PUT /blocks/1
@@ -64,5 +56,18 @@ class BlocksController < ApplicationController
   def handle_error(err)
     flash[:alert] = err.message
     render :new, status: :unprocessable_entity
+  end
+
+  def create_transactions
+    @transactions = CnabParserService.new(block_params[:cnab].tempfile.path).call.map { |t| t.merge(block_id: @block.id) }
+    Transaction.insert_all!(@transactions)
+  rescue Date::Error => e
+    handle_error(e)
+  rescue ArgumentError => e
+    handle_error(e)
+  rescue Errno::ENOENT => e
+    handle_error(e)
+  rescue StandardError => e
+    handle_error(e)
   end
 end

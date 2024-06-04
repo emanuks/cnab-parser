@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Block < ApplicationRecord
   has_many :transactions, dependent: :destroy
   belongs_to :user

@@ -1,24 +1,59 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# CNAB Parser
 
-Things you may want to cover:
+#### Description
 
-* Ruby version
+MVC Ruby on Rails project of a parser for CNAB Files.
 
-* System dependencies
+This web application has a form for uploading CNAB Files, after uploading a valid CNAB file you'll be able to see all transactions correctly parsed from this file, with income, expense and total values per file.
 
-* Configuration
+The parser checks if the file is valid and if each field has the correct format.
 
-* Database creation
+This application has devise authentication and Google OAuth, you can either create your own user from scratch or just sing in through Google.
 
-* Database initialization
+#### CNAB Documentation
 
-* How to run the test suite
+| Field     | Start | End | Length | Description                 |
+| --------- | ----- | --- | ------ | --------------------------- |
+| Type      | 1     | 1   | 1      | Transaction type            |
+| Date      | 2     | 9   | 8      | Transaction date            |
+| Value     | 10    | 19  | 10     | Transaction value * 100     |
+| CPF       | 20    | 30  | 11     | Brazilian taxpayer registry |
+| Bank Card | 31    | 42  | 12     | Transaction bank card       |
+| Time      | 43    | 48  | 6      | Time in brazilian time zone |
+| Owner     | 49    | 62  | 14     | Owner Name                  |
+| Nome loja | 63    | 81  | 19     | Store Name                  |
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Transaction Types
 
-* Deployment instructions
+| Type | Description             | Nature  | Signal |
+| ---- | ----------------------- | ------- | ------ |
+| 1    | Débito                 | Income  | +      |
+| 2    | Boleto                  | Expense | -      |
+| 3    | Financiamento           | Expense | -      |
+| 4    | Crédito                | Income  | +      |
+| 5    | Recebimento Empréstimo | Income  | +      |
+| 6    | Vendas                  | Income  | +      |
+| 7    | Recebimento TED         | Income  | +      |
+| 8    | Recebimento DOC         | Income  | +      |
+| 9    | Aluguel                 | Expense | -      |
 
-* ...
+#### How to Run
+
+First you'll need to replace your PG user and password on database.yml file.
+
+You'll also need a master key to run this project, since it has env variables related to Google OAuth.
+
+`rails db:create`
+
+`rails db:migrate`
+
+`rails assets:precompile`
+
+`rails s`
+
+#### How to Test
+
+Simply run on your terminal:
+
+`rspec`
