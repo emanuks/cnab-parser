@@ -6,13 +6,8 @@
       <%= render "devise/shared/error_messages", resource: resource %>
       
       <div class="field">
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name, autofocus: true, class: "border rounded border-zinc-300 w-full mb-4 p-1" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name, class: "border rounded border-zinc-300 w-full mb-4 p-1" %>
+        <%= f.label :full_name %>
+        <%= f.text_field :full_name, autofocus: true, class: "border rounded border-zinc-300 w-full mb-4 p-1" %>
       </div>
 
       <div class="field">
