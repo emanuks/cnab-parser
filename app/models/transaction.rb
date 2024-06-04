@@ -1,3 +1,3 @@
 class Transaction < ApplicationRecord
-  has_one_attached :cnab
+  belongs_to :block
 end
