@@ -1,4 +1,3 @@
-
 # CNAB Parser
 
 #### Description
@@ -42,7 +41,11 @@ This application has devise authentication and Google OAuth, you can either crea
 
 First you'll need to replace your PG user and password on database.yml file.
 
-You'll also need a master key to run this project, since it has env variables related to Google OAuth.
+You'll also need a master key to run this project, since it has env variables related to Google OAuth, you can contact me for the key.
+
+Create a master.key file inside config folder and paste the master key in it.
+
+Then run the following commands on your terminal.
 
 `rails db:create`
 
