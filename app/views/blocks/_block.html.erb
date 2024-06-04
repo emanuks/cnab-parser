@@ -1,2 +1,10 @@
-<div id="<%= dom_id block %>">
-</div>
+<% if @block.present? %>
+  <div class="flex flex-row gap-3 mb-5">
+    <%= render "total", title: "Incomes", value: @block.incomes, color: "bg-green-200" %>
+    <%= render "total", title: "Expenses", value: @block.expenses, color: "bg-rose-200" %>
+    <%= render "total", title: "Total", value: @block.total, color: @block.total >= 0 ? "bg-green-200" : "bg-rose-200" %>
+  </div>
+
+  <%= render "pages/cards", items: @block.transactions, is_block: false %>
+<% end %>
+

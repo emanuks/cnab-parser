@@ -43,6 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_015207) do
   end
 
   create_table "blocks", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -50,12 +51,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_015207) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string "type", limit: 1
-    t.date "date"
-    t.decimal "value"
+    t.string "tx_type", limit: 1
+    t.date "tx_date"
+    t.decimal "tx_value"
     t.string "cpf", limit: 11
     t.string "bank_card", limit: 12
-    t.time "time"
+    t.time "tx_time"
     t.string "owner_name", limit: 14
     t.string "store_name", limit: 19
     t.datetime "created_at", null: false

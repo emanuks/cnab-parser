@@ -54,7 +54,7 @@ describe CnabParserService do
     context 'with valid file path but with invalid time' do
       it 'raise an exception' do
         service = described_class.new('incorrect_time.txt')
-        expect { service.call }.to raise_error(StandardError)
+        expect { service.call }.to raise_error(ArgumentError)
       end
     end
 
@@ -62,12 +62,12 @@ describe CnabParserService do
       it 'should return the transaction array' do
         service = described_class.new('CNAB.txt')
         transactions = [{
-          type: '3',
-          date: Date.parse('20190301'),
-          value: 142,
+          tx_type: '3',
+          tx_date: Date.parse('20190301'),
+          tx_value: 142,
           cpf: '09620676017',
           bank_card: '4753****3153',
-          time: Time.parse('20190301 153453'),
+          tx_time: Time.parse('20190301 153453'),
           owner_name: 'JOÃO MACEDO',
           store_name: 'BAR DO JOÃO'
         }]

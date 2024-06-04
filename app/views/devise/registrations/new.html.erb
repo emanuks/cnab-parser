@@ -1,4 +1,4 @@
-<div class="w-dvw h-dvh flex justify-center items-center bg-zinc-300">
+<div class="w-dvw min-h-dvh flex justify-center items-center bg-zinc-100">
   <div class="border rounded border-zinc-300 w-96 shadow-md bg-white px-10 py-10">
     <h2 class="text-center text-2xl mb-5">Sign Up</h2>
 
@@ -7,12 +7,12 @@
       
       <div class="field">
         <%= f.label :full_name %>
-        <%= f.text_field :full_name, autofocus: true, class: "border rounded border-zinc-300 w-full mb-4 p-1" %>
+        <%= f.text_field :full_name, autofocus: true, class: "border rounded border-zinc-300 w-full mb-4 p-1 focus:outline-indigo-600" %>
       </div>
 
       <div class="field">
         <%= f.label :email %>
-        <%= f.email_field :email, autocomplete: "email", class: "border rounded border-zinc-300 w-full mb-4 p-1" %>
+        <%= f.email_field :email, autocomplete: "email", class: "border rounded border-zinc-300 w-full mb-4 p-1 focus:outline-indigo-600" %>
       </div>
 
       <div class="field">
@@ -20,12 +20,12 @@
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "border rounded border-zinc-300 w-full mb-4 p-1" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "border rounded border-zinc-300 w-full mb-4 p-1 focus:outline-indigo-600" %>
       </div>
 
       <div class="field">
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "border rounded border-zinc-300 w-full mb-10 p-1" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "border rounded border-zinc-300 w-full mb-10 p-1 focus:outline-indigo-600" %>
       </div>
 
       <div class="actions">

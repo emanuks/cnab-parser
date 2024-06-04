@@ -1,0 +1,68 @@
+<div class="flex flex-col gap-4">
+  <% items.each_with_index do |item, index| %>
+    <div class="flex flex-row justify-between items-center w-full p-3 rounded shadow-sm bg-indigo-100">
+      <% if is_block %>
+        <div>
+          <p class="font-bold font-zinc-700">
+            <%= item.name %>
+          </p>
+          <p class="<%= item.total < 0 ? 'text-rose-500' : 'text-green-500'%>">
+            <%= item.total < 0 ? '-' : '' %>$<%= number_with_precision item.total.abs, precision: 2 %>
+          </p>
+        </div>
+        <p>
+          <%= link_to "View Block", item, class: "font-bold text-zinc-500 p-4 rounded-lg hover:bg-indigo-300 hover:text-white" %>
+        </p>
+      <% else %>
+        <div class="text-zinc-700">
+          <p class="font-bold text-lg mb-2">Transaction <%= index + 1 %></p>
+
+          <p>
+            <span class="font-bold">Type: </span>
+            <span><%= Transaction::TX_TYPES[item.tx_type.to_i] %></span>
+          </p>
+
+          <p>
+            <span class="font-bold">Nature: </span>
+            <span><%= (Block::INCOME_TYPES.include? item.tx_type) ? 'Income' : 'Expense' %></span>
+          </p>
+
+          <p>
+            <span class="font-bold">Date: </span>
+            <span><%= item.tx_date.strftime("%d/%m/%Y") %></span>
+          </p>
+
+          <p>
+            <span class="font-bold">Value: </span>
+            <span>$<%= number_with_precision item.tx_value, precision: 2 %></span>
+          </p>
+
+          <p>
+            <span class="font-bold">CPF: </span>
+            <span><%= CPF.new(item.cpf).formatted %></span>
+          </p>
+
+          <p>
+            <span class="font-bold">Bank Card: </span>
+            <span><%= item.bank_card %></span>
+          </p>
+
+          <p>
+            <span class="font-bold">Time: </span>
+            <span><%= item.tx_time.strftime("%H:%M:%S %Z") %></span>
+          </p>
+
+          <p>
+            <span class="font-bold">Owner Name: </span>
+            <span><%= item.owner_name %></span>
+          </p>
+
+          <p>
+            <span class="font-bold">Store: </span>
+            <span><%= item.store_name %></span>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

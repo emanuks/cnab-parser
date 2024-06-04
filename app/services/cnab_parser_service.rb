@@ -23,15 +23,15 @@ class CnabParserService
     file.each do |line|
       validate_format(line)
 
-      type = line[0]
-      validate_type(type)
+      tx_type = line[0]
+      validate_type(tx_type)
 
       date_string = line[1..8]
-      date = Date.parse(date_string)
+      tx_date = Date.parse(date_string)
 
       value_string = line[9..18]
       validate_value(value_string)
-      value = value_string.to_i / 100
+      tx_value = value_string.to_i / 100
 
       cpf = line[19..29]
       validate_cpf(cpf)
@@ -40,19 +40,19 @@ class CnabParserService
       validate_bank_card(bank_card)
 
       time_string = line[42..47]
-      time = Time.parse("#{date_string} #{time_string}")
+      tx_time = Time.parse("#{date_string} #{time_string}")
 
       owner_name = line[48..61].strip
 
       store_name = line[62..80].strip
 
       transactions << {
-        type:,
-        date:,
-        value:,
+        tx_type:,
+        tx_date:,
+        tx_value:,
         cpf:,
         bank_card:,
-        time:,
+        tx_time:,
         owner_name:,
         store_name:
       }
